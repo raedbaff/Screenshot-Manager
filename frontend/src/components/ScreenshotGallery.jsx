@@ -27,8 +27,7 @@ const ScreenshotGallery = () => {
       if (response.ok) {
         setLoading(false);
         const data = await response.json();
-        console.log("your data");
-        console.log(data);
+
         setScreenshots(data.screenshots);
         const numberOfPages = Math.ceil(data.screenshots.length / itemsPerPage);
         setPages(numberOfPages);
@@ -41,7 +40,7 @@ const ScreenshotGallery = () => {
   };
 
   useEffect(() => {
-    fetchScreenshots(); // Initial fetch
+    fetchScreenshots();
     const intervalid = setInterval(fetchScreenshots, 11000);
     return () => clearInterval(intervalid);
   }, []);
@@ -96,8 +95,8 @@ const ScreenshotGallery = () => {
           {Array.from({ length: pages }, (_, index) => (
             <div
               key={index}
-              className={`w-7 h-7 text-white bg-gray-800 flex items-center justify-center cursor-pointer ${
-                currentPage === index + 1 ? "bg-blue-500" : ""
+              className={`w-7 h-7 text-white flex items-center justify-center cursor-pointer ${
+                currentPage === index + 1 ? "bg-blue-400" : "bg-gray-800"
               }`}
               onClick={() => setCurrentPage(index + 1)}
             >

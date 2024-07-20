@@ -20,7 +20,12 @@
         />
         <button id="confirm-button" class="confirm-button">Set Interval</button>
       </div>
-      <button id="toggle-button" class="toggle-button">Start Capture</button>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <button id="toggle-button" class="toggle-button">Start Capture</button>
+        <div class="pulse-animation capture" id="now-capturing" style="display: none;">Now Capturing ... </div>
+
+      </div>
+      <strong id="current-interval" class="current-interval"></strong>
     </div>
   </body>
 </html>

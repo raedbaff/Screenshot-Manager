@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const toggleButton = document.getElementById("toggle-button");
   const confirmButton = document.getElementById("confirm-button");
+  document.getElementById("current-interval").textContent =
+    "Current periodic interval = 10 seconds";
 
   function startCapture() {
     window.electron.send("start-capture");
@@ -8,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleButton.style.backgroundColor = "red";
     confirmButton.disabled = true;
     confirmButton.style.backgroundColor = "gray";
+    document.getElementById("now-capturing").style.display = "block";
   }
 
   function stopCapture() {
@@ -16,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleButton.style.backgroundColor = "green";
     confirmButton.disabled = false;
     confirmButton.style.backgroundColor = "#2e2ed6";
+    document.getElementById("now-capturing").style.display = "none";
   }
 
   toggleButton.addEventListener("click", () => {
@@ -33,6 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     window.electron.send("change-interval", interval);
     alert(`Successfully changed interval to ${interval}ms`);
-    document.getElementById("interval-input").value = null
+    document.getElementById("interval-input").value = null;
+    document.getElementById(
+      "current-interval"
+    ).textContent = `Current periodic interval = ${interval / 1000} second(s)`;
   });
 });
