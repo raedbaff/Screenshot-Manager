@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
+require("dotenv").config();
 const path = require("path");
 const fs = require("fs");
 const FormData = require("form-data");
@@ -9,7 +10,10 @@ let captureIntervalId;
 var captureInterval = 10000;
 
 async function captureScreenshot() {
-  const imgPath = path.join(app.getPath("temp"), `screenshot-${Date.now()}.png`);
+  const imgPath = path.join(
+    app.getPath("temp"),
+    `screenshot-${Date.now()}.png`
+  );
   try {
     await screenshot({ filename: imgPath });
     return imgPath;
@@ -31,7 +35,7 @@ async function uploadScreenshot(filePath) {
 
   try {
     const response = await axios.post(
-      "http://localhost:4000/screenshots",
+      `${process.env.REACT_APP_BACKEND_URL}/screenshots`,
       form,
       {
         headers: {
